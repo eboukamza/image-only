@@ -1,6 +1,6 @@
 {
   "name": "Image Only",
-  "short_name": "Image Only",
+  "short_name": "ImgOnly",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
