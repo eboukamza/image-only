@@ -1,37 +1,45 @@
-<ion-app>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        Image Only
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <div class="ion-padding">
-      <ion-card>
-        <img *ngIf="image?.url" [src]="image?.url" />
-        <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png">
-        <ion-card-content *ngIf="!image?.url">Select an image to remove its metadata</ion-card-content>
-        <ion-card-content *ngIf="image?.url">Image cleaned!</ion-card-content>
-      </ion-card>
+<nav class="navbar has-shadow is-spaced" aria-label="main navigation">
+  <div class="navbar-brand">
+    <div class="navbar-item is-size-4 has-text-weight-medium" style="padding-left: 1rem">
+      Image Only
     </div>
+  </div>
+</nav>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin:32px;bottom:72px">
-      <a *ngIf="image?.url" [href]="image?.url" download="image-cleaned.jpeg">
-             <ion-fab-button>
-               <ion-icon name="download"></ion-icon>
-             </ion-fab-button>
-           </a>
-    </ion-fab>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin:32px">
-      <ion-fab-button>
-        <ion-icon name="image"></ion-icon>
-        <input type="file" accept="image/jpeg" (change)="loadImage($event)">
-      </ion-fab-button>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container" style="max-width: 640px">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img *ngIf="image?.url" [src]="image?.url" />
+            <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <ng-container *ngIf="!image?.url">Select an image to remove its metadata</ng-container>
+            <ng-container *ngIf="image?.url">Image cleaned!</ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    </ion-fab>
+<div class="buttons fab-buttons">
 
-  </ion-content>
+  <a class="button is-link fab-button " [href]="image?.url" download="image-cleaned.jpeg">
+    <span class="icon">
+      <i class="fas fa-download"></i>
+    </span>
+  </a>
 
-</ion-app>
+  <button class="button is-link fab-button">
+    <span class="icon">
+      <i class="fas fa-image"></i>
+      <input type="file" accept="image/jpeg" (change)="loadImage($event)">
+    </span>
+  </button>
+
+</div>
