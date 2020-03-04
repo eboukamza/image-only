@@ -52,7 +52,28 @@ export class ImageService {
     return canvas;
   }
 
-  private calculateOutputSize(width, height, maxWidth, maxHeight) {
+  public rotate90(imageUrl) {
+    return new Promise(success => {
+        const image = new Image();
+        image.addEventListener('load', () => success(image));
+        image.src = imageUrl;
+      }
+    ).then((image: HTMLImageElement) => {
+        const canvas = document.createElement('canvas');
+        canvas.height = image.width;
+        canvas.width = image.height;
+
+        const context = canvas.getContext('2d');
+        context.translate(canvas.width / 2, canvas.height / 2);
+        context.rotate(90 * Math.PI / 180); // 90 degrees.
+        context.drawImage(image, -image.width / 2, -image.height / 2);
+
+        return canvas.toDataURL('image/jpeg');
+      }
+    );
+  }
+
+  calculateOutputSize(width, height, maxWidth, maxHeight) {
     const scale = (value, ratio) => Math.floor(value * ratio);
     let newWidth;
     let newHeight;

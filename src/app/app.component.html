@@ -18,28 +18,30 @@
         </div>
         <div class="card-content">
           <div class="content">
-            <ng-container *ngIf="!image?.url">Select an image to remove its metadata</ng-container>
-            <ng-container *ngIf="image?.url">Image cleaned!</ng-container>
+            <ng-container *ngIf="image?.url else selectImage">Image cleaned!</ng-container>
+            <ng-template #selectImage>Select an image to remove its metadata</ng-template>
           </div>
         </div>
+        <footer *ngIf="image?.url" class="card-footer">
+          <a class="card-footer-item" (click)="rotate()">Rotate
+            <span class="icon"><i class="fas fa-level-down-alt"></i></span>
+          </a>
+          <a class="card-footer-item" [href]="image?.url" download="image-cleaned.jpeg">Save
+            <span class="icon">
+              <i class="fas fa-download"></i>
+            </span>
+          </a>
+        </footer>
       </div>
     </div>
   </div>
 </section>
 
 <div class="buttons fab-buttons">
-
-  <a class="button is-link fab-button " [href]="image?.url" download="image-cleaned.jpeg">
-    <span class="icon">
-      <i class="fas fa-download"></i>
-    </span>
-  </a>
-
   <button class="button is-link fab-button">
     <span class="icon">
       <i class="fas fa-image"></i>
       <input type="file" accept="image/jpeg" (change)="loadImage($event)">
     </span>
   </button>
-
 </div>

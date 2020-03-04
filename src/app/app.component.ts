@@ -22,8 +22,13 @@ export class AppComponent {
       .then(imageFile => this.imageService.convertToUrl(imageFile))
       .then(imageUrl => this.image = new Image(imageUrl))
       .catch(error => console.error(error))
-      .then(() => {
-        $event.target.value = ''; // reset input
-      });
+      // finally reset input
+      .then(() => $event.target.value = '');
+  }
+
+  rotate() {
+    this.imageService.rotate90(this.image.url)
+      .then(imageUrl => this.image.url = imageUrl)
+
   }
 }
