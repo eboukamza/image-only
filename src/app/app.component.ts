@@ -18,7 +18,7 @@ export class AppComponent {
 
   loadImage($event) {
     const originalImage = $event.target.files[0];
-    const randomName = generateRandomName();
+    const randomName = generateRandomName(originalImage.type);
 
     this.imageService.cleanImage(originalImage)
       .then(imageFile => this.imageService.convertToUrl(imageFile))
