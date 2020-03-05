@@ -1,8 +1,16 @@
-<nav class="navbar has-shadow is-spaced" aria-label="main navigation">
+<nav class="navbar has-shadow is-fixed-top" aria-label="main navigation">
   <div class="navbar-brand">
     <div class="navbar-item is-size-4 has-text-weight-medium" style="padding-left: 1rem">
       Image Only
     </div>
+  </div>
+  <div class="buttons fab-buttons">
+    <button class="button is-link fab-button">
+      <span class="icon">
+        <i class="fas fa-image"></i>
+        <input type="file" accept="image/jpeg,image/png" (change)="loadImage($event)">
+      </span>
+    </button>
   </div>
 </nav>
 
@@ -36,12 +44,3 @@
     </div>
   </div>
 </section>
-
-<div class="buttons fab-buttons">
-  <button class="button is-link fab-button">
-    <span class="icon">
-      <i class="fas fa-image"></i>
-      <input type="file" accept="image/jpeg" (change)="loadImage($event)">
-    </span>
-  </button>
-</div>
