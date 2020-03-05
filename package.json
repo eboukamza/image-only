@@ -8,7 +8,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:dist": "ng build --prod --base-href=\"/image-only/\"",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
