@@ -34,7 +34,7 @@
           <a class="card-footer-item" (click)="rotate()">Rotate
             <span class="icon"><i class="fas fa-level-down-alt"></i></span>
           </a>
-          <a class="card-footer-item" [href]="image?.url" download="image-cleaned.jpeg">Save
+          <a class="card-footer-item" [href]="image.url" [download]="image.name" target="_blank">Save
             <span class="icon">
               <i class="fas fa-download"></i>
             </span>

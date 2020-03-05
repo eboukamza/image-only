@@ -52,7 +52,7 @@ export class ImageService {
     return canvas;
   }
 
-  public rotate90(imageUrl) {
+  public rotate90(imageUrl, type) {
     return new Promise(success => {
         const image = new Image();
         image.addEventListener('load', () => success(image));
@@ -68,7 +68,7 @@ export class ImageService {
         context.rotate(90 * Math.PI / 180); // 90 degrees.
         context.drawImage(image, -image.width / 2, -image.height / 2);
 
-        return canvas.toDataURL('image/jpeg');
+        return canvas.toDataURL(type);
       }
     );
   }
