@@ -21,7 +21,7 @@
         <div class="card-image">
           <figure class="image">
             <img *ngIf="image?.url" [src]="image?.url" />
-            <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo">
+            <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
           </figure>
         </div>
         <div class="card-content">
@@ -49,7 +49,7 @@
 
       <p>This tool is made to protect your privacy. No data is sent anywhere.</p>
       <p>Free & open-source under the MIT license.</p>
-      <a href="https://github.com/eboukamza/image-only" target="_blank">
+      <a href="https://github.com/eboukamza/image-only" target="_blank" aria-label="github-repo">
           <span class="icon is-large has-text-grey-dark">
             <i class="fab fa-2x fa-github"></i>
           </span>
