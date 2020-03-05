@@ -21,7 +21,6 @@ export class AppComponent {
     const randomName = generateRandomName(originalImage.type);
 
     this.imageService.cleanImage(originalImage)
-      .then(imageFile => this.imageService.convertToUrl(imageFile))
       .then(imageUrl => this.image = new Image(imageUrl, originalImage.type, randomName))
       .catch(error => console.error(error))
       // finally reset input
