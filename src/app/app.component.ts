@@ -21,7 +21,7 @@ export class AppComponent {
     const files: FileList = $event.target.files;
 
     Promise.all(Array.from(files).map(this.cleanImage))
-      .then(images => {
+      .then((images: Image[]) => {
         // filter errors
         const newImages = images.filter(item => !!item);
         this.images.push(...newImages);
@@ -29,7 +29,7 @@ export class AppComponent {
       .then(() => $event.target.value = '');
   }
 
-  cleanImage = (file): Promise<Image> =>
+  cleanImage = (file) =>
     this.imageService.cleanImage(file)
       .then(imageUrl => {
         const randomName = generateRandomName(file.type);
@@ -46,4 +46,7 @@ export class AppComponent {
     this.images.splice(index, 1);
   }
 
+  imageName(image) {
+    return image.name;
+  }
 }
