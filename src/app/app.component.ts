@@ -11,25 +11,39 @@ import { generateRandomName } from './utils';
 })
 export class AppComponent {
 
-  image: Image;
+  images: Image[] = [];
 
   constructor(private imageService: ImageService) {
   }
 
   loadImage($event) {
-    const originalImage = $event.target.files[0];
-    const randomName = generateRandomName(originalImage.type);
 
-    this.imageService.cleanImage(originalImage)
-      .then(imageUrl => this.image = new Image(imageUrl, originalImage.type, randomName))
-      .catch(error => console.error(error))
-      // finally reset input
+    const files: FileList = $event.target.files;
+
+    Promise.all(Array.from(files).map(this.cleanImage))
+      .then(images => {
+        // filter errors
+        const newImages = images.filter(item => !!item);
+        this.images.push(...newImages);
+      })
       .then(() => $event.target.value = '');
   }
 
-  rotate() {
-    this.imageService.rotate90(this.image.url, this.image.type)
-      .then(imageUrl => this.image.url = imageUrl)
+  cleanImage = (file): Promise<Image> =>
+    this.imageService.cleanImage(file)
+      .then(imageUrl => {
+        const randomName = generateRandomName(file.type);
+        return new Image(imageUrl, file.type, randomName);
+      })
+      .catch(error => console.error(error));
+
+  rotate(image) {
+    this.imageService.rotate90(image.url, image.type)
+      .then(imageUrl => image.url = imageUrl)
+  }
+
+  remove(index) {
+    this.images.splice(index, 1);
   }
 
 }

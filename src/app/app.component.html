@@ -7,8 +7,8 @@
   <div class="buttons fab-buttons">
     <button class="button is-link fab-button">
       <span class="icon">
-        <i class="fas fa-image"></i>
-        <input type="file" accept="image/jpeg,image/png" (change)="loadImage($event)">
+        <i class="fas fa-plus"></i>
+        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)">
       </span>
     </button>
   </div>
@@ -17,29 +17,52 @@
 <section class="hero is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container" style="max-width: 640px">
-      <div class="card">
+
+      <div class="card" *ngIf="!images?.length">
         <div class="card-image">
           <figure class="image">
-            <img *ngIf="image?.url" [src]="image?.url" />
-            <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
+            <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
           </figure>
         </div>
         <div class="card-content">
           <div class="content">
-            <ng-container *ngIf="image?.url else selectImage">Image cleaned!</ng-container>
-            <ng-template #selectImage>Select an image to remove its metadata</ng-template>
+            Select an image to remove its metadata
           </div>
         </div>
-        <footer *ngIf="image?.url" class="card-footer">
-          <a class="card-footer-item" (click)="rotate()">Rotate
-            <span class="icon"><i class="fas fa-level-down-alt"></i></span>
-          </a>
-          <a class="card-footer-item" [href]="image.url" [download]="image.name" target="_blank">Save
-            <span class="icon">
+      </div>
+
+      <div *ngFor="let image of images index as index; trackBy: image?.name" class="level">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image">
+              <img *ngIf="image?.url" [src]="image?.url" />
+              <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              Image cleaned!
+            </div>
+          </div>
+          <footer *ngIf="image?.url" class="card-footer">
+            <a class="card-footer-item" (click)="rotate(image)">
+              Rotate
+              <span class="icon"><i class="fas fa-level-down-alt"></i></span>
+            </a>
+            <a class="card-footer-item" (click)="remove(index)">
+              Remove
+              <span class="icon">
+              <i class="fas fa-trash"></i>
+            </span>
+            </a>
+            <a class="card-footer-item" [href]="image.url" [download]="image.name" target="_blank">
+              Save
+              <span class="icon">
               <i class="fas fa-download"></i>
             </span>
-          </a>
-        </footer>
+            </a>
+          </footer>
+        </div>
       </div>
     </div>
   </div>
