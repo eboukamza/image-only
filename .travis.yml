@@ -2,11 +2,11 @@ language: node_js
 node_js:
   - 10
 script:
-  - yarn run build --prod
+  - yarn test:ci && yarn build --prod
 
 deploy:
   - provider: pages
-    local_dir: www
+    local_dir: dist
     skip_cleanup: true
     keep-history: true
     github_token: $GH_TOKEN

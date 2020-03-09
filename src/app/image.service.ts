@@ -19,7 +19,7 @@ export class ImageService {
       });
   }
 
-  private calculateOutputSize(width, height, maxWidth, maxHeight) {
+  calculateOutputSize(width, height, maxWidth, maxHeight) {
     const scale = (value, ratio) => Math.floor(value * ratio);
     let newWidth;
     let newHeight;
