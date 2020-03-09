@@ -1,7 +1,7 @@
 {
   "name": "Image Only",
   "short_name": "ImgOnly",
-  "theme_color": "#1976d2",
+  "theme_color": "#fafafa",
   "background_color": "#fafafa",
   "display": "standalone",
   "start_url": "index.html",
