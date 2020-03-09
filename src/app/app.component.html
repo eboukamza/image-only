@@ -18,7 +18,7 @@
   <div class="hero-body">
     <div class="container" style="max-width: 640px">
 
-      <div class="card" *ngIf="!images?.length">
+      <div class="card" *ngIf="!images?.length; else actions">
         <div class="card-image">
           <figure class="image">
             <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
@@ -30,6 +30,17 @@
           </div>
         </div>
       </div>
+      <ng-template #actions>
+        <div class="level">
+          <button class="button is-danger is-outlined" (click)="removeAll()">
+            <span>Remove all</span>
+            <span class="icon is-small">
+              <i class="fas fa-trash"></i>
+            </span>
+          </button>
+        </div>
+
+      </ng-template>
 
       <div *ngFor="let image of images index as index; trackBy:imageName" class="level">
         <div class="card">

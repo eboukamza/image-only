@@ -46,6 +46,10 @@ export class AppComponent {
     this.images.splice(index, 1);
   }
 
+  removeAll() {
+    this.images = [];
+  }
+
   imageName(image) {
     return image.name;
   }
