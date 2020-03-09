@@ -4,7 +4,7 @@
       Image Only
     </div>
   </div>
-  <div class="buttons fab-buttons">
+  <div class="fab-buttons">
     <button class="button is-link fab-button">
       <span class="icon">
         <i class="fas fa-plus"></i>
@@ -21,19 +21,20 @@
       <div class="card" *ngIf="!images?.length; else actions">
         <div class="card-image">
           <figure class="image">
-            <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
+            <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 10%">
           </figure>
         </div>
         <div class="card-content">
-          <div class="content">
-            Select an image to remove its metadata
+          <div class="content has-text-centered">
+            Select the images to remove their metadata
           </div>
         </div>
+        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)">
       </div>
       <ng-template #actions>
         <div class="level">
           <button class="button is-danger is-outlined" (click)="removeAll()">
-            <span>Remove all</span>
+            <span>Delete all</span>
             <span class="icon is-small">
               <i class="fas fa-trash"></i>
             </span>
@@ -46,8 +47,7 @@
         <div class="card">
           <div class="card-image">
             <figure class="image">
-              <img *ngIf="image?.url" [src]="image?.url" />
-              <img *ngIf="!image?.url" src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 2rem">
+              <img *ngIf="image.url" [src]="image.url" />
             </figure>
           </div>
           <div class="card-content">
@@ -61,7 +61,7 @@
               <span class="icon"><i class="fas fa-level-down-alt"></i></span>
             </a>
             <a class="card-footer-item" (click)="remove(index)">
-              Remove
+              Delete
               <span class="icon">
               <i class="fas fa-trash"></i>
             </span>
@@ -81,7 +81,6 @@
   <footer class="footer hero-foot has-background-white-ter has-text-grey-dark">
     <div class="content has-text-centered ">
 
-      <p>This tool is made to protect your privacy. No data is sent anywhere.</p>
       <p>Free & open-source under the MIT license.</p>
       <a href="https://github.com/eboukamza/image-only" target="_blank" aria-label="github-repo">
           <span class="icon is-large has-text-grey-dark">
