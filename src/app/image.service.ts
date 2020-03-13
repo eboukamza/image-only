@@ -66,7 +66,7 @@ export class ImageService {
     return new Promise(success => {
       const image = new Image();
       image.addEventListener('load', () => success(image));
-      image.src = url
+      image.src = url;
     });
   }
 

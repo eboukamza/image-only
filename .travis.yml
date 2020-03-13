@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 10
 script:
-  - yarn test:ci && yarn build --prod --base-href /image-only/
+  - yarn lint && yarn test:ci && yarn build --prod --base-href /image-only/
 
 deploy:
   - provider: pages

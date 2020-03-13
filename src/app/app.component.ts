@@ -39,7 +39,7 @@ export class AppComponent {
 
   rotate(image) {
     this.imageService.rotate90(image.url, image.type)
-      .then(imageUrl => image.url = imageUrl)
+      .then(imageUrl => image.url = imageUrl);
   }
 
   remove(index) {

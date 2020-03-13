@@ -61,6 +61,7 @@
       "single"
     ],
     "trailing-comma": false,
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
     "no-output-on-prefix": true,
     "no-inputs-metadata-property": true,
     "no-host-metadata-property": true,
