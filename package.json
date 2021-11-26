@@ -9,7 +9,6 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
-    "test:ci": "jest --ci",
     "lint": "ng lint"
   },
   "private": true,

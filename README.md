@@ -1,6 +1,6 @@
 Image Only
 ==
-[![Travis](https://travis-ci.org/eboukamza/image-only.svg?branch=master)](https://travis-ci.org/eboukamza/image-only)
+[![CircleCI](https://circleci.com/gh/eboukamza/image-only.svg?style=svg)](https://circleci.com/gh/eboukamza/image-only)
 
 PWA to remove image metadata.
 
