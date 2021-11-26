@@ -18,7 +18,7 @@ jobs:
       - checkout
       - *restore_cache
       - run: yarn install --frozen-lockfile
-      - run: yarn audit
+      - run: yarn audit --groups dependencies
       - save_cache:
           paths:
             - ~/.cache/yarn
@@ -41,7 +41,7 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - run: yarn build --configuration production --base-href /image-only/
+      - run: yarn build --configuration production
       - persist_to_workspace:
           root: ~/image-only
           paths:
@@ -50,9 +50,10 @@ jobs:
     <<: *node
     steps:
       - checkout
+      - *restore_cache
       - attach_workspace:
           at: ~/image-only
-      - run: ls dist
+      - run: yarn deploy
 
 workflows:
   version: 2
@@ -68,10 +69,10 @@ workflows:
       - build:
           requires:
             - install
-            - test
-            - lint
       - deploy:
           requires:
+            - test
+            - lint
             - build
           filters:
             branches:
