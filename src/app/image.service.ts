@@ -41,6 +41,7 @@ export class ImageService {
     canvas.width = outputSize.width;
     const context = canvas.getContext('2d');
     context.drawImage(image, 0, 0, outputSize.width, outputSize.height);
+    this.drawCleanedWith(context);
 
     return canvas;
   }
@@ -56,10 +57,23 @@ export class ImageService {
           context.translate(canvas.width / 2, canvas.height / 2);
           context.rotate(90 * Math.PI / 180); // 90 degrees.
           context.drawImage(image, -image.width / 2, -image.height / 2);
+          this.drawCleanedWith(context);
 
           return canvas.toDataURL(type);
         }
       );
+  }
+
+  private drawCleanedWith(context: CanvasRenderingContext2D) {
+      let fontSize = Math.ceil(context.canvas.width * 0.03);
+      if (fontSize > 50) {
+          fontSize = 50
+      } else if (fontSize < 10) {
+          fontSize = 10
+      }
+      context.font = `${fontSize}px Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, sans-serif`;
+      context.fillStyle = "#939393"
+      context.fillText("image-only.web.app", context.canvas.width * 0.02, context.canvas.height * 0.98);
   }
 
   private createImageElement(url): Promise<HTMLImageElement> {
