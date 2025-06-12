@@ -1,7 +1,6 @@
 import { ImageService } from './image.service';
 
 describe('resize image', () => {
-
   let imageService: ImageService;
 
   beforeEach(() => {

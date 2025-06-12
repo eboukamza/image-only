@@ -10,6 +10,10 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [importProvidersFrom(BrowserModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }))]
-})
-  .catch(err => console.log(err));
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    )
+  ]
+}).catch((err) => console.log(err));

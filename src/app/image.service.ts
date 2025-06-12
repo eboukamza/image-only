@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ImageService {
-
   /** @return a link to cleaned image */
   public cleanImage(file: File, maxWidth = 3000, maxHeight = 3000): Promise<string> {
     if (!file || !file.type.match('image.*')) {
@@ -10,13 +9,12 @@ export class ImageService {
     }
 
     const imageUrl = URL.createObjectURL(file);
-    return this.createImageElement(imageUrl)
-      .then(image => {
-        const outputSize = this.calculateOutputSize(image.width, image.height, maxWidth, maxHeight);
+    return this.createImageElement(imageUrl).then((image) => {
+      const outputSize = this.calculateOutputSize(image.width, image.height, maxWidth, maxHeight);
 
-        const canvas: HTMLCanvasElement = this.redrawImage(image, outputSize);
-        return canvas.toDataURL(file.type);
-      });
+      const canvas: HTMLCanvasElement = this.redrawImage(image, outputSize);
+      return canvas.toDataURL(file.type);
+    });
   }
 
   calculateOutputSize(width: number, height: number, maxWidth: number, maxHeight: number) {
@@ -35,7 +33,10 @@ export class ImageService {
     return { width: newWidth, height: newHeight };
   }
 
-  private redrawImage(image: HTMLImageElement, outputSize: {width: number; height: number}): HTMLCanvasElement {
+  private redrawImage(
+    image: HTMLImageElement,
+    outputSize: { width: number; height: number }
+  ): HTMLCanvasElement {
     const canvas = document.createElement('canvas');
     canvas.height = outputSize.height;
     canvas.width = outputSize.width;
@@ -47,41 +48,42 @@ export class ImageService {
   }
 
   public rotate90(imageUrl: string, type: string) {
-    return this.createImageElement(imageUrl)
-      .then((image: HTMLImageElement) => {
-          const canvas = document.createElement('canvas');
-          canvas.height = image.width;
-          canvas.width = image.height;
+    return this.createImageElement(imageUrl).then((image: HTMLImageElement) => {
+      const canvas = document.createElement('canvas');
+      canvas.height = image.width;
+      canvas.width = image.height;
 
-          const context = canvas.getContext('2d')!;
-          context.translate(canvas.width / 2, canvas.height / 2);
-          context.rotate(90 * Math.PI / 180); // 90 degrees.
-          context.drawImage(image, -image.width / 2, -image.height / 2);
-          this.drawCleanedWith(context);
+      const context = canvas.getContext('2d')!;
+      context.translate(canvas.width / 2, canvas.height / 2);
+      context.rotate((90 * Math.PI) / 180); // 90 degrees.
+      context.drawImage(image, -image.width / 2, -image.height / 2);
+      this.drawCleanedWith(context);
 
-          return canvas.toDataURL(type);
-        }
-      );
+      return canvas.toDataURL(type);
+    });
   }
 
   private drawCleanedWith(context: CanvasRenderingContext2D) {
-      let fontSize = Math.ceil(context.canvas.width * 0.03);
-      if (fontSize > 50) {
-          fontSize = 50
-      } else if (fontSize < 10) {
-          fontSize = 10
-      }
-      context.font = `${fontSize}px Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, sans-serif`;
-      context.fillStyle = "#939393"
-      context.fillText("image-only.web.app", context.canvas.width * 0.02, context.canvas.height * 0.98);
+    let fontSize = Math.ceil(context.canvas.width * 0.03);
+    if (fontSize > 50) {
+      fontSize = 50;
+    } else if (fontSize < 10) {
+      fontSize = 10;
+    }
+    context.font = `${fontSize}px Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, sans-serif`;
+    context.fillStyle = '#939393';
+    context.fillText(
+      'image-only.web.app',
+      context.canvas.width * 0.02,
+      context.canvas.height * 0.98
+    );
   }
 
   private createImageElement(url: string): Promise<HTMLImageElement> {
-    return new Promise(success => {
+    return new Promise((success) => {
       const image = new Image();
       image.addEventListener('load', () => success(image));
       image.src = url;
     });
   }
-
 }

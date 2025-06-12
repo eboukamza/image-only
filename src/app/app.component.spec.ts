@@ -6,7 +6,6 @@ import { Image } from './image.model';
 const createImage = () => new Image('test-url', 'test-type', 'test-name');
 
 describe('AppComponent tests', () => {
-
   let app: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
@@ -20,11 +19,9 @@ describe('AppComponent tests', () => {
   });
 
   it('should show images', () => {
-    app.images = [ createImage(), createImage(), createImage() ];
+    app.images = [createImage(), createImage(), createImage()];
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelectorAll('.card')).toHaveLength(3);
-
   });
-
 });

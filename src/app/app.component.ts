@@ -6,11 +6,11 @@ import { ImageService } from './image.service';
 import { generateRandomName } from './utils';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.sass'],
-    imports: [NgIf, NgFor],
-    standalone: true
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.sass'],
+  imports: [NgIf, NgFor],
+  standalone: true
 })
 export class AppComponent {
   private imageService = inject(ImageService);
@@ -24,22 +24,20 @@ export class AppComponent {
     Promise.all(Array.from(files).map(this.cleanImage))
       .then((images: Image[]) => {
         // filter errors
-        const newImages = images.filter(item => !!item);
+        const newImages = images.filter((item) => !!item);
         this.images.push(...newImages);
       })
-      .then(() => eventTarget.value = '');
+      .then(() => (eventTarget.value = ''));
   }
 
   cleanImage = (file: File): Promise<Image> =>
-    this.imageService.cleanImage(file)
-      .then(imageUrl => {
-        const randomName = generateRandomName(file.type);
-        return new Image(imageUrl, file.type, randomName);
-      })
+    this.imageService.cleanImage(file).then((imageUrl) => {
+      const randomName = generateRandomName(file.type);
+      return new Image(imageUrl, file.type, randomName);
+    });
 
   rotate(image: Image): void {
-    this.imageService.rotate90(image.url, image.type)
-      .then(imageUrl => image.url = imageUrl);
+    this.imageService.rotate90(image.url, image.type).then((imageUrl) => (image.url = imageUrl));
   }
 
   remove(index: number): void {
