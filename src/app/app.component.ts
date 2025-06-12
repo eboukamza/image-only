@@ -17,9 +17,9 @@ export class AppComponent {
   constructor(private imageService: ImageService) {
   }
 
-  loadImage($event) {
-
-    const files: FileList = $event.target.files;
+  loadImage($event: Event) {
+    const eventTarget = $event.target as HTMLInputElement;
+    const files: FileList = eventTarget.files!;
 
     Promise.all(Array.from(files).map(this.cleanImage))
       .then((images: Image[]) => {
@@ -27,31 +27,30 @@ export class AppComponent {
         const newImages = images.filter(item => !!item);
         this.images.push(...newImages);
       })
-      .then(() => $event.target.value = '');
+      .then(() => eventTarget.value = '');
   }
 
-  cleanImage = (file) =>
+  cleanImage = (file: File): Promise<Image> =>
     this.imageService.cleanImage(file)
       .then(imageUrl => {
         const randomName = generateRandomName(file.type);
         return new Image(imageUrl, file.type, randomName);
       })
-      .catch(error => console.error(error));
 
-  rotate(image) {
+  rotate(image: Image): void {
     this.imageService.rotate90(image.url, image.type)
       .then(imageUrl => image.url = imageUrl);
   }
 
-  remove(index) {
+  remove(index: number): void {
     this.images.splice(index, 1);
   }
 
-  removeAll() {
+  removeAll(): void {
     this.images = [];
   }
 
-  imageName(image) {
+  imageName(_index: number, image: Image): string {
     return image.name;
   }
 }

@@ -2,7 +2,7 @@ import { ImageService } from './image.service';
 
 describe('resize image', () => {
 
-  let imageService;
+  let imageService: ImageService;
 
   beforeEach(() => {
     imageService = new ImageService();

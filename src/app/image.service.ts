@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ImageService {
 
   /** @return a link to cleaned image */
-  public cleanImage(file, maxWidth = 3000, maxHeight = 3000): Promise<string> {
+  public cleanImage(file: File, maxWidth = 3000, maxHeight = 3000): Promise<string> {
     if (!file || !file.type.match('image.*')) {
       return Promise.reject('File type is not an image');
     }
@@ -19,8 +19,8 @@ export class ImageService {
       });
   }
 
-  calculateOutputSize(width, height, maxWidth, maxHeight) {
-    const scale = (value, ratio) => Math.floor(value * ratio);
+  calculateOutputSize(width: number, height: number, maxWidth: number, maxHeight: number) {
+    const scale = (value: number, ratio: number) => Math.floor(value * ratio);
     let newWidth;
     let newHeight;
     if (width > height) {
@@ -35,25 +35,25 @@ export class ImageService {
     return { width: newWidth, height: newHeight };
   }
 
-  private redrawImage(image, outputSize): HTMLCanvasElement {
+  private redrawImage(image: HTMLImageElement, outputSize: {width: number; height: number}): HTMLCanvasElement {
     const canvas = document.createElement('canvas');
     canvas.height = outputSize.height;
     canvas.width = outputSize.width;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext('2d')!;
     context.drawImage(image, 0, 0, outputSize.width, outputSize.height);
     this.drawCleanedWith(context);
 
     return canvas;
   }
 
-  public rotate90(imageUrl, type) {
+  public rotate90(imageUrl: string, type: string) {
     return this.createImageElement(imageUrl)
       .then((image: HTMLImageElement) => {
           const canvas = document.createElement('canvas');
           canvas.height = image.width;
           canvas.width = image.height;
 
-          const context = canvas.getContext('2d');
+          const context = canvas.getContext('2d')!;
           context.translate(canvas.width / 2, canvas.height / 2);
           context.rotate(90 * Math.PI / 180); // 90 degrees.
           context.drawImage(image, -image.width / 2, -image.height / 2);
@@ -76,7 +76,7 @@ export class ImageService {
       context.fillText("image-only.web.app", context.canvas.width * 0.02, context.canvas.height * 0.98);
   }
 
-  private createImageElement(url): Promise<HTMLImageElement> {
+  private createImageElement(url: string): Promise<HTMLImageElement> {
     return new Promise(success => {
       const image = new Image();
       image.addEventListener('load', () => success(image));
