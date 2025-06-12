@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ImageService {
 
   /** @return a link to cleaned image */

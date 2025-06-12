@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
 
 import { Image } from './image.model';
 import { ImageService } from './image.service';
@@ -8,14 +9,13 @@ import { generateRandomName } from './utils';
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.sass'],
-    standalone: false
+    imports: [NgIf, NgFor],
+    standalone: true
 })
 export class AppComponent {
+  private imageService = inject(ImageService);
 
   images: Image[] = [];
-
-  constructor(private imageService: ImageService) {
-  }
 
   loadImage($event: Event) {
     const eventTarget = $event.target as HTMLInputElement;
