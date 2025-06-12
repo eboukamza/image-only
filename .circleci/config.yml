@@ -3,7 +3,7 @@ version: 2
 node: &node
   working_directory: ~/image-only
   docker:
-    - image: cimg/node:16.13-browsers
+    - image: cimg/node:20.19-browsers
 
 aliases:
   - &restore_cache

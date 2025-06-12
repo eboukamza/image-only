@@ -8,7 +8,7 @@
     <button class="button is-link fab-button">
       <span class="icon">
         <i class="fas fa-plus"></i>
-        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)">
+        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)" />
       </span>
     </button>
   </div>
@@ -17,19 +17,16 @@
 <section class="hero is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container" style="max-width: 640px">
-
       <div class="card" *ngIf="!images?.length; else actions">
         <div class="card-image">
           <figure class="image">
-            <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 10%">
+            <img src="assets/icons/icon-512x512.png" alt="image-only-logo" style="padding: 10%" />
           </figure>
         </div>
         <div class="card-content">
-          <div class="content has-text-centered">
-            Select the images to remove their metadata
-          </div>
+          <div class="content has-text-centered">Select the images to remove their metadata</div>
         </div>
-        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)">
+        <input type="file" accept="image/jpeg,image/png" multiple (change)="loadImage($event)" />
       </div>
       <ng-template #actions>
         <div class="level">
@@ -40,10 +37,9 @@
             </span>
           </button>
         </div>
-
       </ng-template>
 
-      <div *ngFor="let image of images index as index; trackBy:imageName" class="level">
+      <div *ngFor="let image of images; index as index; trackBy: imageName" class="level">
         <div class="card">
           <div class="card-image">
             <figure class="image">
@@ -51,9 +47,7 @@
             </figure>
           </div>
           <div class="card-content">
-            <div class="content">
-              Image cleaned!
-            </div>
+            <div class="content">Image cleaned!</div>
           </div>
           <footer *ngIf="image?.url" class="card-footer">
             <a class="card-footer-item" (click)="rotate(image)">
@@ -63,14 +57,14 @@
             <a class="card-footer-item" (click)="remove(index)">
               Delete
               <span class="icon">
-              <i class="fas fa-trash"></i>
-            </span>
+                <i class="fas fa-trash"></i>
+              </span>
             </a>
             <a class="card-footer-item" [href]="image.url" [download]="image.name" target="_blank">
               Save
               <span class="icon">
-              <i class="fas fa-download"></i>
-            </span>
+                <i class="fas fa-download"></i>
+              </span>
             </a>
           </footer>
         </div>
@@ -79,15 +73,13 @@
   </div>
 
   <footer class="footer hero-foot has-background-white-ter has-text-grey-dark">
-    <div class="content has-text-centered ">
-
+    <div class="content has-text-centered">
       <p>Free & open-source under the MIT license.</p>
       <a href="https://github.com/eboukamza/image-only" target="_blank" aria-label="github-repo">
-          <span class="icon is-large has-text-grey-dark">
-            <i class="fab fa-2x fa-github"></i>
-          </span>
+        <span class="icon is-large has-text-grey-dark">
+          <i class="fab fa-2x fa-github"></i>
+        </span>
       </a>
     </div>
-
   </footer>
 </section>
